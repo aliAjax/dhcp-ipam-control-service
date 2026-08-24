@@ -1,0 +1,8 @@
+services:
+  dhcp-ipam-control:
+    build: ..
+    environment:
+      HTTP_ADDR: ":8080"
+      DHCPV4_ADDR: ":6767"
+      DHCPV6_ADDR: ":6768"
+    ports: ["8080:8080", "6767:6767/udp", "6768:6768/udp"]
