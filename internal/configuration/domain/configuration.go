@@ -10,9 +10,6 @@ type Config struct {
 }
 
 func (c Config) Validate() error {
-	if c.Payload != nil {
-		c.Payload["validated"] = true
-	}
 	if c.ID == "" {
 		return fmt.Errorf("configuration id required")
 	}

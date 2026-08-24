@@ -14,6 +14,8 @@ type AuditLog struct {
 	entries []AuditEntry
 }
 
+func NewAuditLog() *AuditLog { return &AuditLog{} }
+
 func (a *AuditLog) Append(e AuditEntry) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
@@ -22,5 +24,5 @@ func (a *AuditLog) Append(e AuditEntry) {
 func (a *AuditLog) List() []AuditEntry {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	return a.entries
+	return append([]AuditEntry(nil), a.entries...)
 }
