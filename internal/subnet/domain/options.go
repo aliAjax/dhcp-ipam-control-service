@@ -1,0 +1,33 @@
+package domain
+
+import "net"
+
+type Options struct {
+	Gateway      net.IP
+	DNS          []net.IP
+	Domain       string
+	LeaseSeconds int
+}
+
+func (o Options) Valid() bool {
+	if o.Gateway != nil && o.Gateway.To4() == nil {
+		return false
+	}
+	for _, d := range o.DNS {
+		if d == nil {
+			return false
+		}
+	}
+	return o.LeaseSeconds >= 0
+}
+func (o Options) Clone() Options {
+	x := Options{Domain: o.Domain, LeaseSeconds: o.LeaseSeconds}
+	if o.Gateway != nil {
+		x.Gateway = append(net.IP(nil), o.Gateway...)
+	}
+	x.DNS = make([]net.IP, len(o.DNS))
+	for i, d := range o.DNS {
+		x.DNS[i] = append(net.IP(nil), d...)
+	}
+	return x
+}
