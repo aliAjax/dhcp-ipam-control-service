@@ -1,0 +1,13 @@
+{
+  "mode": "service",
+  "start": "go run ./cmd/server",
+  "workdir": ".",
+  "env": {
+    "HTTP_ADDR": "127.0.0.1:18080",
+    "DHCPV4_ADDR": "127.0.0.1:0",
+    "DHCPV6_ADDR": "[::1]:0"
+  },
+  "ready_url": "http://127.0.0.1:18080/healthz",
+  "ready_status": [200],
+  "startup_timeout": 30
+}
