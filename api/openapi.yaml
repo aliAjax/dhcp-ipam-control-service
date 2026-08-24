@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: DHCP IPAM Control API
+  version: 1.0.0
+paths:
+  /v1/networks:
+    post:
+      summary: Create network
+      requestBody:
+        required: true
+      responses:
+        '201': {description: created}
+  /v1/subnets: {post: {summary: Create subnet, responses: {'201': {description: created}}}}
+  /v1/pools: {post: {summary: Create pool, responses: {'201': {description: created}}}}
+  /v1/leases: {get: {summary: Cursor list leases}, post: {summary: Allocate lease}}
+  /v1/leases/{id}/release: {post: {summary: Release lease}}
+  /healthz: {get: {summary: Liveness}}
+  /readyz: {get: {summary: Readiness}}
