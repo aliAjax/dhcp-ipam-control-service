@@ -1,0 +1,7 @@
+syntax = "proto3";
+package dhcpipam.v1;
+service Operations { rpc PublishConfiguration(PublishRequest) returns (PublishResponse); rpc GetHealth(HealthRequest) returns (HealthResponse); }
+message PublishRequest { string id = 1; }
+message PublishResponse { string status = 1; }
+message HealthRequest {}
+message HealthResponse { string status = 1; }
