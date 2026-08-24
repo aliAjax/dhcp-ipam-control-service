@@ -1,0 +1,6 @@
+http_addr: ":8080"
+dhcpv4_addr: ":6767"
+dhcpv6_addr: ":6768"
+node_id: "node-1"
+ha_mode: "active-active"
+lease_ttl: "1h"
