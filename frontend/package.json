@@ -1,0 +1,8 @@
+{
+  "name": "dhcp-ipam-console",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "mkdir -p dist && cp ../internal/httpapi/console.html dist/index.html"
+  }
+}
