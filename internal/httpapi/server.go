@@ -71,8 +71,11 @@ func (s *Server) middleware(auth string, next http.Handler) http.Handler {
 			writeError(w, http.StatusRequestEntityTooLarge, "request too large")
 			return
 		}
-		base := context.Background()
-		ctx, cancel := context.WithTimeout(base, 5*time.Second)
+		// Derive a cancellable context from the request context so that the
+		// request id (set by [httpx.RequestID]) and any deadline already in
+		// place are preserved, and so that downstream handlers observe the
+		// same cancellation signal as the outer request.
+		ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
 		defer cancel()
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})

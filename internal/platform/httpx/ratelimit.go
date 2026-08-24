@@ -1,7 +1,6 @@
 package httpx
 
 import (
-	"context"
 	"net/http"
 	"sync"
 	"time"
@@ -34,7 +33,6 @@ func RateLimit(l *Limiter, next http.Handler) http.Handler {
 			WriteError(w, 429, "rate_limited", "too many requests", r.Context())
 			return
 		}
-		ctx := context.Background()
-		next.ServeHTTP(w, r.WithContext(ctx))
+		next.ServeHTTP(w, r)
 	})
 }
